@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>VestiOn</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- GÓRNY NAGŁÓWEK -->
+  <header class="main-header">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="assets/VestiOn.png" alt="VestiOn" class="logo-img">
+    </div>
+    <!-- Kategorie jako obrazy -->
+    <nav class="main-nav">
+      <a href="#"><img src="assets/Ona.png" alt="Ona"></a>
+      <a href="#"><img src="assets/On.png" alt="On"></a>
+      <a href="#"><img src="assets/Dziecko.png" alt="Dziecko"></a>
+      <a href="#"><img src="assets/Akcesoria.png" alt="Akcesoria"></a>
+    </nav>
+    <!-- Szukaj -->
+    <div class="search-container">
+      <img src="assets/szukaj.png" alt="Szukaj" class="search-label">
+      <input type="text" placeholder="...">
+    </div>
+  </header>
+
+  <!-- GŁÓWNA ZAWARTOŚĆ -->
+  <main class="main-content">
+    <!-- LEWA SEKCJA: Manekin 3D i założone ubrania -->
+    <section class="model-section">
+      <!-- Obrazek z napisem "Mój Manekin" -->
+      <div class="manekin-title">
+        <img src="assets/mój_manekin.png" alt="Mój Manekin">
+      </div>
+      <div class="model-wrapper">
+        <!-- Canvas Three.js -->
+        <canvas id="webglCanvas"></canvas>
+        <!-- Ikonki ubrań, które mamy na manekinie -->
+        <div class="worn-items"></div>
+      </div>
+    </section>
+
+    <!-- PRAWA SEKCJA: produkty -->
+    <section class="products-section">
+      <!-- Filtry (jako jeden obrazek) -->
+      <div class="filters">
+        <img src="assets/sortuj_v_rozmiar_v_kolor_v_cena_v_wszystkie_fil.png" 
+             alt="Sortuj, Rozmiar, Kolor, Cena, Wszystkie filtry"
+             class="filters-img">
+      </div>
+      <div class="products-grid">
+        <!-- Produkt 1: Crop top -->
+        <div class="product-card" data-type="shirt">
+          <!-- Miniaturka ubrania (shirt-icon) -->
+          <img src="assets/shirt-icon.png" alt="Koszulka" class="product-image">
+          <!-- Nazwa (Crop_top_na_ramiączkach.png) -->
+          <div class="product-title">
+            <img src="assets/Crop_top_na_ramiączkach.png" alt="Crop top na ramiączkach">
+          </div>
+          <!-- Cena (59,99_pln.png) -->
+          <div class="product-price">
+            <img src="assets/59,99_pln.png" alt="59,99 PLN">
+          </div>
+        </div>
+
+        <!-- Produkt 2: Spodnie wide leg -->
+        <div class="product-card" data-type="pants">
+          <img src="assets/pants-icon.png" alt="Spodnie wide leg" class="product-image">
+          <div class="product-title">
+            <img src="assets/Spodnie_wide_leg.png" alt="Spodnie wide leg">
+          </div>
+          <div class="product-price">
+            <img src="assets/89,99_pln.png" alt="89,99 PLN">
+          </div>
+        </div>
+
+        <!-- Produkt 3: Koszulka z nadrukiem -->
+        <div class="product-card" data-type="shirt">
+          <img src="assets/shirt-icon.png" alt="Koszulka z nadrukiem" class="product-image">
+          <div class="product-title">
+            <img src="assets/Koszulka_z_nadrukiem.png" alt="Koszulka z nadrukiem">
+          </div>
+          <div class="product-price">
+            <img src="assets/49,99_pln.png" alt="49,99 PLN">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Ładowanie Three.js (r149) + OrbitControls + GLTFLoader -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/loaders/GLTFLoader.js"></script>
+  <!-- Nasz skrypt -->
+  <script src="script.js"></script>
+</body>
+</html>

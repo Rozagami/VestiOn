@@ -1,0 +1,176 @@
+/* RESET / PODSTAWOWE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* NAGŁÓWEK */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.main-nav a {
+  margin: 0 1rem;
+  display: inline-block;
+}
+
+.main-nav img {
+  height: 25px;
+  width: auto;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-label {
+  height: 20px;
+  width: auto;
+}
+
+.search-container input {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* GŁÓWNA SEKCJA */
+.main-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2rem;
+}
+
+/* LEWA STRONA (MANEKIN) */
+.model-section {
+  flex: 1;
+}
+
+.manekin-title {
+  margin-bottom: 1rem;
+}
+
+.manekin-title img {
+  height: 25px; 
+  width: auto;
+}
+
+/* Kontener z tłem i manekinem */
+.model-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+
+  /* Jeśli chcesz tło z pliku tlo.png, odkomentuj:
+  background-image: url("assets/tlo.png");
+  background-size: cover;
+  background-position: center;
+  */
+
+  background-color: #dcd6f7; /* Jasnofioletowe tło */
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#webglCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Ikonki ubrań, które są aktualnie "założone" */
+.worn-items {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.worn-item {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.worn-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s;
+}
+
+.worn-item:hover img {
+  transform: scale(1.1);
+}
+
+/* PRAWA STRONA (PRODUKTY) */
+.products-section {
+  flex: 1;
+}
+
+.filters {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.filters-img {
+  height: 20px;
+  width: auto;
+}
+
+/* Grid produktów */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.product-title img,
+.product-price img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.3rem;
+}
