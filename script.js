@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   controls.target.set(0, 1.6, 0);
 
   // Oświetlenie
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
   scene.add(ambientLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
   dirLight.position.set(5, 10, 5);
   scene.add(dirLight);
 
