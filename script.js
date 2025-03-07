@@ -1,3 +1,4 @@
+console.log("THREE.OrbitControls:", THREE.OrbitControls);
 document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
