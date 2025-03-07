@@ -13,17 +13,33 @@ body {
 
 /* NAGŁÓWEK */
 .main-header {
+  /* usuwamy justify-content: space-between; 
+     bo teraz mamy inny układ */
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column; /* logo u góry, potem kategorie */
+  align-items: center; /* wyśrodkujemy */
   background-color: #fff;
-  padding: 0.5rem 2rem;
+  padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.top-bar {
+  margin-bottom: 0.5rem; /* odstęp od nawigacji */
+}
+
 .logo-img {
-  height: 40px;
+  height: 80px; /* Zwiększamy logo */
   width: auto;
+}
+
+
+/* Dla sekcji z kategoriami i wyszukiwaniem */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* rozciągamy na całą szerokość */
+  max-width: 1200px; /* możesz ograniczyć szerokość */
 }
 
 .main-nav a {
@@ -31,26 +47,12 @@ body {
   display: inline-block;
 }
 
-.main-nav img {
-  height: 25px;
-  width: auto;
-}
-
+/* Wyszukiwanie może pozostać bez zmian 
+   lub dostosuj szerokość i pozycję, np.: */
 .search-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.search-label {
-  height: 20px;
-  width: auto;
-}
-
-.search-container input {
-  padding: 0.3rem 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 /* GŁÓWNA SEKCJA */

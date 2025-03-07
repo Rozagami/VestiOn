@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     0.1,
     1000
   );
-  camera.position.set(0, 1.6, 3);
+  camera.position.set(0, 2.0, 3);
 
   // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
@@ -62,20 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Spodnie (domyślnie niewidoczne)
-  loadGLB('models/pants.glb', (model) => {
-    pants = model;
-    pants.visible = false;
-    pants.scale.set(1, 1, 1);
-    pants.position.set(0, 0, 0);
-  });
+loadGLB('models/pants.glb', (model) => {
+  pants = model;
+  pants.visible = false;
+  // Skalowanie ubrań tak samo jak manekin, np. 0.3
+  pants.scale.set(0.3, 0.3, 0.3);
+  pants.position.set(0, 0, 0);
+});
 
   // Koszulka (domyślnie niewidoczna)
-  loadGLB('models/shirt.glb', (model) => {
-    shirt = model;
-    shirt.visible = false;
-    shirt.scale.set(1, 1, 1);
-    shirt.position.set(0, 0, 0);
-  });
+loadGLB('models/shirt.glb', (model) => {
+  shirt = model;
+  shirt.visible = false;
+  // Skalowanie koszulki też na 0.3
+  shirt.scale.set(0.3, 0.3, 0.3);
+  shirt.position.set(0, 0, 0);
+});
 
   // Render pętla – automatyczny powolny obrót
   function animate() {
