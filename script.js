@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+renderer.toneMappingExposure = 1.0; // dostosuj, aby nie było prześwietlone
+
 
   // OrbitControls – umożliwiają obracanie kamerą myszką
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
