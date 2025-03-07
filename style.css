@@ -71,24 +71,16 @@ body {
 }
 
 .manekin-title img {
-  height: 25px; 
+  height: 25px;
   width: auto;
 }
 
-/* Kontener z tłem i manekinem */
 .model-wrapper {
   position: relative;
   width: 100%;
   max-width: 400px;
   height: 500px;
-
-  /* Jeśli chcesz tło z pliku tlo.png, odkomentuj:
-  background-image: url("assets/tlo.png");
-  background-size: cover;
-  background-position: center;
-  */
-
-  background-color: #dcd6f7; /* Jasnofioletowe tło */
+  background: #dcd6f7; /* Jasnofioletowe tło */
   border-radius: 20px;
   overflow: hidden;
 }
@@ -99,7 +91,6 @@ body {
   display: block;
 }
 
-/* Ikonki ubrań, które są aktualnie "założone" */
 .worn-items {
   position: absolute;
   top: 10px;
@@ -141,7 +132,6 @@ body {
   width: auto;
 }
 
-/* Grid produktów */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

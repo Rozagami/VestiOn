@@ -1,10 +1,7 @@
-console.log("THREE.OrbitControls:", THREE.OrbitControls);
 document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
   const scene = new THREE.Scene();
-
-  // Tło sceny (np. czarny)
   scene.background = new THREE.Color(0x000000);
 
   // Kamera
@@ -20,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
-  // OrbitControls (myszka)
+  // OrbitControls – umożliwiają obracanie kamerą myszką
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
@@ -34,23 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
   dirLight.position.set(5, 10, 5);
   scene.add(dirLight);
 
-  // Loader do plików .glb
-  const loader = new THREE.GLTFLoader();
-
-  // Obiekty 3D
-  let mannequin, pants, shirt;
-
-  // Aby manekin i ubrania kręciły się razem, można stworzyć grupę:
+  // Dodajemy grupę, aby manekin i ubrania obracały się razem
   const modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
-  // Funkcja wczytująca .glb
+  // Ładowanie modeli (.glb)
+  const loader = new THREE.GLTFLoader();
+  let mannequin, pants, shirt;
+
   function loadGLB(path, callback) {
     loader.load(
       path,
       (gltf) => {
         const model = gltf.scene;
-        modelGroup.add(model); // Dodajemy do grupy
+        modelGroup.add(model);
         callback(model);
       },
       undefined,
@@ -60,14 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Wczytujemy manekina
+  // Manekin
   loadGLB('models/model.glb', (model) => {
     mannequin = model;
     mannequin.scale.set(1, 1, 1);
     mannequin.position.set(0, 0, 0);
   });
 
-  // Wczytujemy spodnie (domyślnie niewidoczne)
+  // Spodnie (domyślnie niewidoczne)
   loadGLB('models/pants.glb', (model) => {
     pants = model;
     pants.visible = false;
@@ -75,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pants.position.set(0, 0, 0);
   });
 
-  // Wczytujemy koszulkę (domyślnie niewidoczną)
+  // Koszulka (domyślnie niewidoczna)
   loadGLB('models/shirt.glb', (model) => {
     shirt = model;
     shirt.visible = false;
@@ -83,19 +77,19 @@ document.addEventListener('DOMContentLoaded', () => {
     shirt.position.set(0, 0, 0);
   });
 
-  // Render + powolny obrót
+  // Render pętla – automatyczny powolny obrót
   function animate() {
     requestAnimationFrame(animate);
 
-    // Jeśli chcesz bardzo wolny automatyczny obrót całej grupy:
-    modelGroup.rotation.y += 0.0005; 
+    // Bardzo wolny obrót całej grupy
+    modelGroup.rotation.y += 0.0005;
 
     controls.update();
     renderer.render(scene, camera);
   }
   animate();
 
-  // Zakładanie/Zdejmowanie ubrań
+  // Interakcje – zakładanie ubrań
   const productCards = document.querySelectorAll('.product-card');
   const wornItemsContainer = document.querySelector('.worn-items');
 
@@ -112,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Dodaje małą ikonkę w .worn-items
+  // Dodawanie ikonki ubrania (do zdjęcia)
   function addWornItemIcon(type) {
     const existing = wornItemsContainer.querySelector(`[data-type="${type}"]`);
     if (existing) return;
@@ -121,8 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     div.classList.add('worn-item');
     div.setAttribute('data-type', type);
 
-    // Ta sama ikonka co w products-section
-    // Dla shirt -> shirt-icon, dla pants -> pants-icon
+    // Taka sama ikonka jak w panelu produktów
     const img = document.createElement('img');
     if (type === 'pants') {
       img.src = 'assets/pants-icon.png';
@@ -134,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     div.appendChild(img);
     wornItemsContainer.appendChild(div);
 
-    // Kliknięcie -> zdejmij
+    // Kliknięcie w ikonkę -> zdejmij ubranie
     div.addEventListener('click', () => {
       removeClothes(type);
       wornItemsContainer.removeChild(div);
