@@ -24,17 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
   controls.target.set(0, 1.6, 0);
 
   // Oświetlenie
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
   scene.add(ambientLight);
 
   const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
-  dirLight.position.set(5, 10, 5);
+  dirLight.position.set(0, 10, 10);
   scene.add(dirLight);
 
 // Światło wypełniające z przeciwnej strony
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.4);
-fillLight.position.set(-5, 10, -5); 
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+fillLight.position.set(10, 10, -10); 
 scene.add(fillLight);
+
+
 
 
   // Dodajemy grupę, aby manekin i ubrania obracały się razem
