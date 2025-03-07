@@ -31,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
   dirLight.position.set(5, 10, 5);
   scene.add(dirLight);
 
+// Światło wypełniające z przeciwnej strony
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.4);
+fillLight.position.set(-5, 10, -5); 
+scene.add(fillLight);
+
+
   // Dodajemy grupę, aby manekin i ubrania obracały się razem
   const modelGroup = new THREE.Group();
   scene.add(modelGroup);
