@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mannequin.scale.set(1, 1, 1);
     mannequin.scale.set(0.3, 0.3, 0.3); 
 // Przesunięcie manekina w górę (np. o 0.5 w osi Y)
-  mannequin.position.set(0, 0, 0);
+  mannequin.position.set(0, 0.4, 0);
   });
 
   // Spodnie (domyślnie niewidoczne)
@@ -69,7 +69,7 @@ loadGLB('models/pants.glb', (model) => {
   pants.visible = false;
   // Skalowanie ubrań tak samo jak manekin, np. 0.3
   pants.scale.set(0.3, 0.3, 0.3);
-  pants.position.set(0, 0, 0);
+  pants.position.set(0, 0.4, 0);
 });
 
   // Koszulka (domyślnie niewidoczna)
@@ -78,7 +78,7 @@ loadGLB('models/shirt.glb', (model) => {
   shirt.visible = false;
   // Skalowanie koszulki też na 0.3
   shirt.scale.set(0.3, 0.3, 0.3);
-  shirt.position.set(0, 0, 0);
+  shirt.position.set(0, 0.4, 0);
 });
 
   // Render pętla – automatyczny powolny obrót
