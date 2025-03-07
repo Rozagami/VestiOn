@@ -26,15 +26,15 @@ renderer.toneMappingExposure = 1.0; // dostosuj, aby nie było prześwietlone
   controls.target.set(0, 1.6, 0);
 
   // Oświetlenie
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.9);
   scene.add(ambientLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
   dirLight.position.set(0, 10, 10);
   scene.add(dirLight);
 
 // Światło wypełniające z przeciwnej strony
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
 fillLight.position.set(10, 10, -10); 
 scene.add(fillLight);
 
