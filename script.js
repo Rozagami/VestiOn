@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0xdcd6f7);
 
   // Kamera
   const camera = new THREE.PerspectiveCamera(
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGLB('models/model.glb', (model) => {
     mannequin = model;
     mannequin.scale.set(1, 1, 1);
-    mannequin.position.set(0, 0, 0);
+    mannequin.scale.set(0.3, 0.3, 0.3); 
   });
 
   // Spodnie (domyślnie niewidoczne)
