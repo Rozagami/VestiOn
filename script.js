@@ -82,13 +82,22 @@ loadGLB('models/pants.glb', (model) => {
   pants.position.set(0, 0.4, 0);
 });
 
-  // Koszulka (domyślnie niewidoczna)
+  // Crop top (domyślnie niewidoczna)
 loadGLB('models/shirt.glb', (model) => {
   shirt = model;
   shirt.visible = false;
   // Skalowanie koszulki też na 0.3
   shirt.scale.set(0.3, 0.3, 0.3);
   shirt.position.set(0, 0.4, 0);
+});
+
+    // Koszulka (domyślnie niewidoczna)
+loadGLB('models/tshirt.glb', (model) => {
+  tshirt = model;
+  tshirt.visible = false;
+  // Skalowanie koszulki też na 0.3
+  tshirt.scale.set(0.3, 0.3, 0.3);
+  tshirt.position.set(0, 0.4, 0);
 });
 
   // Render pętla – automatyczny powolny obrót
@@ -116,6 +125,9 @@ loadGLB('models/shirt.glb', (model) => {
       } else if (type === 'shirt' && shirt) {
         shirt.visible = true;
         addWornItemIcon('shirt');
+              } else if (type === 'tshirt' && tshirt) {
+        tshirt.visible = true;
+        addWornItemIcon('shirt');
       }
     });
   });
@@ -135,6 +147,8 @@ loadGLB('models/shirt.glb', (model) => {
       img.src = 'assets/pants3d.png';
     } else if (type === 'shirt') {
       img.src = 'assets/shirt3d.png';
+          } else if (type === 'tshirt') {
+      img.src = 'assets/tshirt3d.png';
     }
     img.alt = `Usuń ${type}`;
 
@@ -154,6 +168,8 @@ loadGLB('models/shirt.glb', (model) => {
       pants.visible = false;
     } else if (type === 'shirt' && shirt) {
       shirt.visible = false;
+          } else if (type === 'tshirt' && tshirt) {
+      tshirt.visible = false;
     }
   }
 });
