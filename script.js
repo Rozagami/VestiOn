@@ -123,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     div.setAttribute('data-type', type);
 
     const img = document.createElement('img');
-    if (type === 'pants') img.src = 'assets/pants-icon.png';
-    else if (type === 'shirt') img.src = 'assets/shirt-icon.png';
+    if (type === 'pants') img.src = 'assets/pants3d.png';
+    else if (type === 'shirt') img.src = 'assets/shirt3d.png';
     else if (type === 'tshirt') img.src = 'assets/tshirt3d.png';
     img.alt = `Usuń ${type}`;
 
