@@ -47,7 +47,7 @@ scene.add(fillLight);
 
   // Ładowanie modeli (.glb)
   const loader = new THREE.GLTFLoader();
-  let mannequin, pants, shirt;
+  let mannequin, pants, shirt; tshirt;
 
   function loadGLB(path, callback) {
     loader.load(
