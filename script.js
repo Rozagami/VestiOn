@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  renderer.toneMappingExposure = 1.0;
+renderer.toneMappingExposure = 1.0; // dostosuj, aby nie było prześwietlone
 
-  // OrbitControls
+
+  // OrbitControls – umożliwiają obracanie kamerą myszką
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
@@ -27,20 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Oświetlenie
   const ambientLight = new THREE.AmbientLight(0xffffff, 1.9);
   scene.add(ambientLight);
+
   const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
   dirLight.position.set(0, 10, 10);
   scene.add(dirLight);
-  const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  fillLight.position.set(10, 10, -10);
-  scene.add(fillLight);
 
-  // Grupa modeli
+// Światło wypełniające z przeciwnej strony
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+fillLight.position.set(10, 10, -10); 
+scene.add(fillLight);
+
+
+
+
+  // Dodajemy grupę, aby manekin i ubrania obracały się razem
   const modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
-  // Loader
+  // Ładowanie modeli (.glb)
   const loader = new THREE.GLTFLoader();
-  let mannequin, pants, shirt, tshirt;  // <-- dodane tshirt
+  let mannequin, pants, shirt;
 
   function loadGLB(path, callback) {
     loader.load(
@@ -51,51 +58,52 @@ document.addEventListener('DOMContentLoaded', () => {
         callback(model);
       },
       undefined,
-      (error) => console.error('Błąd ładowania .glb:', error)
+      (error) => {
+        console.error('Błąd ładowania .glb:', error);
+      }
     );
   }
 
   // Manekin
   loadGLB('models/model.glb', (model) => {
     mannequin = model;
-    mannequin.scale.set(0.3, 0.3, 0.3);
-    mannequin.position.set(0, 0.4, 0);
+    mannequin.scale.set(1, 1, 1);
+    mannequin.scale.set(0.3, 0.3, 0.3); 
+// Przesunięcie manekina w górę (np. o 0.5 w osi Y)
+  mannequin.position.set(0, 0.4, 0);
   });
 
-  // Spodnie
-  loadGLB('models/pants.glb', (model) => {
-    pants = model;
-    pants.visible = false;
-    pants.scale.set(0.3, 0.3, 0.3);
-    pants.position.set(0, 0.4, 0);
-  });
+  // Spodnie (domyślnie niewidoczne)
+loadGLB('models/pants.glb', (model) => {
+  pants = model;
+  pants.visible = false;
+  // Skalowanie ubrań tak samo jak manekin, np. 0.3
+  pants.scale.set(0.3, 0.3, 0.3);
+  pants.position.set(0, 0.4, 0);
+});
 
-  // Crop top
-  loadGLB('models/shirt.glb', (model) => {
-    shirt = model;
-    shirt.visible = false;
-    shirt.scale.set(0.3, 0.3, 0.3);
-    shirt.position.set(0, 0.4, 0);
-  });
+  // Koszulka (domyślnie niewidoczna)
+loadGLB('models/shirt.glb', (model) => {
+  shirt = model;
+  shirt.visible = false;
+  // Skalowanie koszulki też na 0.3
+  shirt.scale.set(0.3, 0.3, 0.3);
+  shirt.position.set(0, 0.4, 0);
+});
 
-  // T-shirt
-  loadGLB('models/tshirt.glb', (model) => {
-    tshirt = model;
-    tshirt.visible = false;
-    tshirt.scale.set(0.3, 0.3, 0.3);
-    tshirt.position.set(0, 0.4, 0);
-  });
-
-  // Animacja
+  // Render pętla – automatyczny powolny obrót
   function animate() {
     requestAnimationFrame(animate);
+
+    // Bardzo wolny obrót całej grupy
     modelGroup.rotation.y += 0.0005;
+
     controls.update();
     renderer.render(scene, camera);
   }
   animate();
 
-  // Interakcje z produktami
+  // Interakcje – zakładanie ubrań
   const productCards = document.querySelectorAll('.product-card');
   const wornItemsContainer = document.querySelector('.worn-items');
 
@@ -108,44 +116,44 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (type === 'shirt' && shirt) {
         shirt.visible = true;
         addWornItemIcon('shirt');
-      } else if (type === 'tshirt' && tshirt) {
-        tshirt.visible = true;
-        addWornItemIcon('tshirt');  // <-- poprawione na 'tshirt'
       }
     });
   });
 
+  // Dodawanie ikonki ubrania (do zdjęcia)
   function addWornItemIcon(type) {
-    if (wornItemsContainer.querySelector(`[data-type="${type}"]`)) return;
+    const existing = wornItemsContainer.querySelector(`[data-type="${type}"]`);
+    if (existing) return;
+
     const div = document.createElement('div');
     div.classList.add('worn-item');
     div.setAttribute('data-type', type);
 
+    // Taka sama ikonka jak w panelu produktów
     const img = document.createElement('img');
     if (type === 'pants') {
       img.src = 'assets/pants3d.png';
     } else if (type === 'shirt') {
       img.src = 'assets/shirt3d.png';
-    } else if (type === 'tshirt') {
-      img.src = 'assets/tshirt3d.png';
     }
     img.alt = `Usuń ${type}`;
+
     div.appendChild(img);
     wornItemsContainer.appendChild(div);
 
+    // Kliknięcie w ikonkę -> zdejmij ubranie
     div.addEventListener('click', () => {
       removeClothes(type);
       wornItemsContainer.removeChild(div);
     });
   }
 
+  // Zdejmowanie ubrania
   function removeClothes(type) {
     if (type === 'pants' && pants) {
       pants.visible = false;
     } else if (type === 'shirt' && shirt) {
       shirt.visible = false;
-    } else if (type === 'tshirt' && tshirt) {
-      tshirt.visible = false;  // <-- obsługa 'tshirt'
     }
   }
 });
