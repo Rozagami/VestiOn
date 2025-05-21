@@ -132,9 +132,9 @@ loadGLB('models/shirt.glb', (model) => {
     // Taka sama ikonka jak w panelu produktów
     const img = document.createElement('img');
     if (type === 'pants') {
-      img.src = 'assets/pants3d.png';
+      img.src = 'assets/pants-icon.png';
     } else if (type === 'shirt') {
-      img.src = 'assets/shirt3d.png';
+      img.src = 'assets/shirt-icon.png';
     }
     img.alt = `Usuń ${type}`;
 
