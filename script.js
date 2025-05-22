@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   renderer.toneMappingExposure = 1.0;
-  // Ustawienie koloru czyszczenia (clear color) na beżowy, alpha=1
-  renderer.setClearColor(0xf3ece4, 1);
+  // Pełna przezroczystość tła WebGL
+  renderer.setClearColor(0x000000, 0);
 
   // OrbitControls – umożliwiają obracanie kamerą myszką
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
