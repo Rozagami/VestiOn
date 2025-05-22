@@ -88,7 +88,7 @@ body {
   width: 100%;
   max-width: 400px;
   height: 500px;
-  background: #f3ece4; /* Jasnofioletowe tło */
+  background: url('assets/tlobezowe.png') center / cover no-repeat;
   border-radius: 20px;
   overflow: hidden;
 }
