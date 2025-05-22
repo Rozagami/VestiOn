@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const img = document.createElement('img');
     if (type === 'pants') img.src = 'assets/pants3d.png';
     else if (type === 'shirt') img.src = 'assets/shirt3d.png';
-    else if (type === 'tshirt') img.src = 'assets/tshirt-icon.png';
+    else if (type === 'tshirt') img.src = 'assets/tshirt3d.png';
     img.alt = `Usuń ${type}`;
 
     div.appendChild(img);
