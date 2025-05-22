@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf3ece4);
+  scene.background = null;
+renderer.setClearColor(0x000000, 0); // alpha = 0
 
   // Kamera
   const camera = new THREE.PerspectiveCamera(
