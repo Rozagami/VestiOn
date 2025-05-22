@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
   const scene = new THREE.Scene();
-  // Ustawienie beżowego tła w WebGL (pasuje do CSS-owego #f3ece4)
-  scene.background = new THREE.Color(0xf3ece4);
+  // Usunięcie tła WebGL, aby pokazać CSS-owy background-image
+  scene.background = null;
 
   // Kamera
   const camera = new THREE.PerspectiveCamera(
