@@ -1,9 +1,11 @@
+// Three.js + interakcje z modelami i produktami
+
 document.addEventListener('DOMContentLoaded', () => {
   // Inicjalizacja sceny Three.js
   const canvas = document.getElementById('webglCanvas');
   const scene = new THREE.Scene();
-  scene.background = null;
-renderer.setClearColor(0x000000, 0); // alpha = 0
+  // Ustawienie beżowego tła w WebGL (pasuje do CSS-owego #f3ece4)
+  scene.background = new THREE.Color(0xf3ece4);
 
   // Kamera
   const camera = new THREE.PerspectiveCamera(
@@ -14,10 +16,12 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
   );
   camera.position.set(0, 2.0, 3);
 
-  // Renderer
+  // Renderer z transparentnością
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   renderer.toneMappingExposure = 1.0;
+  // Ustawienie koloru czyszczenia (clear color) na beżowy, alpha=1
+  renderer.setClearColor(0xf3ece4, 1);
 
   // OrbitControls – umożliwiają obracanie kamerą myszką
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -35,7 +39,7 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
   fillLight.position.set(10, 10, -10);
   scene.add(fillLight);
 
-  // Dodajemy grupę, aby manekin i ubrania obracały się razem
+  // Grupa modeli
   const modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
@@ -63,7 +67,7 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
     mannequin.position.set(0, 0.4, 0);
   });
 
-  // Spodnie (domyślnie niewidoczne)
+  // Spodnie
   loadGLB('models/pants.glb', (model) => {
     pants = model;
     pants.visible = false;
@@ -71,7 +75,7 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
     pants.position.set(0, 0.4, 0);
   });
 
-  // Koszulka bez nadruku (domyślnie niewidoczna)
+  // Koszulka bez nadruku
   loadGLB('models/shirt.glb', (model) => {
     shirt = model;
     shirt.visible = false;
@@ -79,7 +83,7 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
     shirt.position.set(0, 0.4, 0);
   });
 
-  // T-shirt z nadrukiem (domyślnie niewidoczna)
+  // T-shirt z nadrukiem
   loadGLB('models/tshirt.glb', (model) => {
     tshirt = model;
     tshirt.visible = false;
@@ -87,7 +91,7 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
     tshirt.position.set(0, 0.4, 0);
   });
 
-  // Render loop – automatyczny powolny obrót
+  // Animacja i render loop
   function animate() {
     requestAnimationFrame(animate);
     modelGroup.rotation.y += 0.0005;
@@ -116,29 +120,29 @@ renderer.setClearColor(0x000000, 0); // alpha = 0
     });
   });
 
-  // Dodawanie ikonki ubrania (do zdjęcia)
+  // Funkcja dodająca ikonkę założonego ubrania
   function addWornItemIcon(type) {
     if (wornItemsContainer.querySelector(`[data-type="${type}"]`)) return;
     const div = document.createElement('div');
     div.classList.add('worn-item');
     div.setAttribute('data-type', type);
-
+  
     const img = document.createElement('img');
     if (type === 'pants') img.src = 'assets/pants3d.png';
     else if (type === 'shirt') img.src = 'assets/shirt3d.png';
     else if (type === 'tshirt') img.src = 'assets/tshirt3d.png';
     img.alt = `Usuń ${type}`;
-
+  
     div.appendChild(img);
     wornItemsContainer.appendChild(div);
-
+  
     div.addEventListener('click', () => {
       removeClothes(type);
       wornItemsContainer.removeChild(div);
     });
   }
 
-  // Zdejmowanie ubrania
+  // Funkcja zdejmująca ubranie
   function removeClothes(type) {
     if (type === 'pants' && pants) pants.visible = false;
     else if (type === 'shirt' && shirt) shirt.visible = false;
